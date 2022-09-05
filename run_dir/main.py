@@ -18,13 +18,17 @@ import oskar
 
 from utils import get_start_time
 
+axis_freq = [50.0]
+
+
+
 LOG = logging.getLogger()
 
 base_settings = {
     "simulator": {
         "double_precision": True,
         "use_gpus": True,
-        "cuda": "1,2",
+        "cuda_device_ids":"0,1,2,3",
         "max_sources_per_chunk": 16384,
         "keep_log_file":True,
         "write_status_to_log_file":True,
@@ -60,7 +64,7 @@ fields = {
         "observation/phase_centre_dec_deg": -10.0,
     },
 }
-axis_freq = [50.0, 70.0, 110.0]
+
 
 def make_sky_model(sky0, settings, radius_deg, flux_min_outer_jy):
     """Filter sky model.
@@ -225,7 +229,7 @@ def make_diff_image_stats(
 
 def run_single(prefix_field, settings, sky, freq_MHz, out0_name, results):
     """Run a single simulation and generate image statistics for it."""
-    out = "%s_%d_MHz_iono" % (prefix_field, freq_MHz)
+    out = "./results/%s_%d_MHz_iono" % (prefix_field, freq_MHz)
     if out in results:
         LOG.info("Using cached results for '%s'", out)
         return
@@ -317,7 +321,6 @@ def run_set(prefix, base_settings, fields, axis_freq, plot_only):
                 #     out0 + ".vis",
                 #     results,
                 # )
-
 
         # # Generate plot for the field.
         # make_plot(prefix, field_name, "image_centre_rms", results, axis_freq)
