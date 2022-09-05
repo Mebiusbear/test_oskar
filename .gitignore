@@ -1,0 +1,9 @@
+oskar*
+GLEAM*
+
+
+telescope_data/
+.cache
+.bash_history
+.astropy
+__pycache__
