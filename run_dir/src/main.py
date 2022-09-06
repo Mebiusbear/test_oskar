@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import sys
+import setting_file
 
 from astropy.io import fits
 import matplotlib
@@ -18,53 +19,14 @@ import oskar
 
 from utils import get_start_time
 
-axis_freq = [50.0]
-
+axis_freq = [170.0]
 
 
 LOG = logging.getLogger()
 
-base_settings = {
-    "simulator": {
-        "double_precision": True,
-        "use_gpus": True,
-        "cuda_device_ids":"0,1,2,3",
-        "max_sources_per_chunk": 16384,
-        "keep_log_file":True,
-        "write_status_to_log_file":True,
-    },
-    "observation": {
-        "frequency_inc_hz": 100e3,
-        "length": 14400.0,
-        "num_time_steps": 240,
-    },
-    "telescope": {
-        "input_directory": "./telescope_data/SKA1-LOW_SKO-0000422_Rev3_38m_SKALA4_spot_frequencies.tm",
-        "pol_mode": "Full",
-    },
-    "interferometer": {
-        "channel_bandwidth_hz": 100e3,
-        "time_average_sec": 1.0,
-        "max_time_samples_per_block": 4,
-    },
-}
-
-# Define axes of parameter space.
-fields = {
-    "EoR0": {
-        "observation/phase_centre_ra_deg": 0.0,
-        "observation/phase_centre_dec_deg": -27.0,
-    },
-    "EoR1": {
-        "observation/phase_centre_ra_deg": 60.0,
-        "observation/phase_centre_dec_deg": -30.0,
-    },
-    "EoR2": {
-        "observation/phase_centre_ra_deg": 170.0,
-        "observation/phase_centre_dec_deg": -10.0,
-    },
-}
-
+base_settings = setting_file.base_settings
+fields = setting_file.fields
+bright_sources = setting_file.bright_sources
 
 def make_sky_model(sky0, settings, radius_deg, flux_min_outer_jy):
     """Filter sky model.
@@ -95,24 +57,6 @@ def make_sky_model(sky0, settings, radius_deg, flux_min_outer_jy):
     )
     return sky_outer
 
-
-def bright_sources():
-    """Returns a list of bright A-team sources."""
-    # Sgr A: guesstimates only!
-    # For A: data from the Molonglo Southern 4 Jy sample (VizieR).
-    # Others from GLEAM reference paper, Hurley-Walker et al. (2017), Table 2.
-    return numpy.array((
-        [266.41683, -29.00781,  2000,0,0,0, 0,  0, 0,  3600, 3600, 0],
-        [ 50.67375, -37.20833,   528,0,0,0, 178e6, -0.51, 0, 0, 0, 0],  # For
-        [201.36667, -43.01917,  1370,0,0,0, 200e6, -0.50, 0, 0, 0, 0],  # Cen
-        [139.52500, -12.09556,   280,0,0,0, 200e6, -0.96, 0, 0, 0, 0],  # Hyd
-        [ 79.95833, -45.77889,   390,0,0,0, 200e6, -0.99, 0, 0, 0, 0],  # Pic
-        [252.78333,   4.99250,   377,0,0,0, 200e6, -1.07, 0, 0, 0, 0],  # Her
-        [187.70417,  12.39111,   861,0,0,0, 200e6, -0.86, 0, 0, 0, 0],  # Vir
-        [ 83.63333,  22.01444,  1340,0,0,0, 200e6, -0.22, 0, 0, 0, 0],  # Tau
-        [299.86667,  40.73389,  7920,0,0,0, 200e6, -0.78, 0, 0, 0, 0],  # Cyg
-        [350.86667,  58.81167, 11900,0,0,0, 200e6, -0.41, 0, 0, 0, 0]   # Cas
-        ))
 
 def make_plot(prefix, field_name, metric_key, results, axis_freq):
     """Plot selected results."""
@@ -258,7 +202,7 @@ def run_set(prefix, base_settings, fields, axis_freq, plot_only):
         # 研究fits结构
         if "GLEAM" in prefix:
             # Load GLEAM catalogue from FITS binary table.
-            hdulist = fits.open("./GLEAM_EGC.fits")
+            hdulist = fits.open("../GLEAM_EGC.fits")
             # pylint: disable=no-member
             cols = hdulist[1].data[0].array
             data = numpy.column_stack(

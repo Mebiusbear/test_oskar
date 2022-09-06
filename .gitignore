@@ -1,7 +1,7 @@
 oskar*
 GLEAM*
 
-
+fits_data/
 telescope_data/
 .cache
 .bash_history
