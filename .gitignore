@@ -8,6 +8,7 @@ telescope_data/
 .cache
 .nv
 .config
+.ipynb_checkpoints/
 .bash_history
 .astropy
 __pycache__

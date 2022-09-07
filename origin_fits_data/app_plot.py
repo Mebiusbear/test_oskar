@@ -28,21 +28,6 @@ import argparse
 #     im = np.load("imager_test.npy")
 
 
-
-
-# def multi_plot(image_name,image_list):
-#     plt.subplot(131)
-#     plt.subplot(132)
-#     plt.subplot(133)
-
-#     # plt.colorbar()
-
-#     plt.savefig(image_name)
-
-
-
-
-
 fits_list = ["50_MHz_no_errors_I.fits","50_MHz_iono_I.fits"]
 # fits_list = ["70_MHz_no_errors_I.fits","70_MHz_iono_I.fits"]
 # fits_list = ["110_MHz_no_errors_I.fits","110_MHz_iono_I.fits"]
