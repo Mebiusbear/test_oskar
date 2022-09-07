@@ -1,9 +1,13 @@
 oskar*
 GLEAM*
+test_screen_60s.fits
 
-fits_data/
+fits_data/*.fits
+origin_fits_data/*.fits
 telescope_data/
 .cache
+.nv
+.config
 .bash_history
 .astropy
 __pycache__

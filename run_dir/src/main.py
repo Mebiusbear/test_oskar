@@ -19,7 +19,7 @@ import oskar
 
 from utils import get_start_time
 
-axis_freq = [170.0]
+axis_freq = [70.0,110.0]
 
 
 LOG = logging.getLogger()
@@ -173,14 +173,14 @@ def make_diff_image_stats(
 
 def run_single(prefix_field, settings, sky, freq_MHz, out0_name, results):
     """Run a single simulation and generate image statistics for it."""
-    out = "./results/%s_%d_MHz_iono" % (prefix_field, freq_MHz)
+    out = "%s_%d_MHz_iono" % (prefix_field, freq_MHz)
     if out in results:
         LOG.info("Using cached results for '%s'", out)
         return
     settings["telescope/ionosphere_screen_type"] = "External"
     settings[
         "telescope/external_tec_screen/input_fits_file"
-    ] = "./test_screen_60s.fits"
+    ] = "../test_screen_60s.fits"
     settings["interferometer/oskar_vis_filename"] = out + ".vis"
     settings["interferometer/ms_filename"] = out + ".ms"
     make_vis_data(settings, sky)
@@ -254,17 +254,17 @@ def run_set(prefix, base_settings, fields, axis_freq, plot_only):
                 settings["interferometer/oskar_vis_filename"] = out0 + ".vis"
                 settings["interferometer/ms_filename"] = out0 + ".ms"
                 # print (settings.to_dict())
-                make_vis_data(settings, sky)
+                # make_vis_data(settings, sky)
 
-                # # Simulate the error case.
-                # run_single(
-                #     prefix_field,
-                #     settings,
-                #     sky,
-                #     freq_MHz,
-                #     out0 + ".vis",
-                #     results,
-                # )
+                # Simulate the error case.
+                run_single(
+                    prefix_field,
+                    settings,
+                    sky,
+                    freq_MHz,
+                    out0 + ".vis",
+                    results,
+                )
 
         # # Generate plot for the field.
         # make_plot(prefix, field_name, "image_centre_rms", results, axis_freq)

@@ -1,4 +1,5 @@
 import numpy
+import os
 
 base_settings = {
     "simulator": {
@@ -24,6 +25,25 @@ base_settings = {
         "max_time_samples_per_block": 4,
     },
 }
+
+def params_img(freq,output_dir,error=False):
+    if not os.path.exists("../%s"%output_dir):
+        os.mkdir("../%s"%output_dir)
+    if not error:
+        noerror = "_no_errors"
+    else:
+        noerror = "_iono"
+    return {
+            "image/fov_deg": 5.5,
+            "image/size": 8192,
+            "image/algorithm": "W-projection",
+            "image/fft/use_gpu": True,
+            "image/fft/grid_on_gpu": True,
+            "image/input_vis_data": "./GLEAM_A-team_EoR0_%d_MHz%s.ms"%(freq,noerror),
+            "image/root_path": "../%s/%d_MHz%s"%(output_dir,freq,noerror)
+        }
+
+
 # Define axes of parameter space.
 fields = {
     "EoR0": {
@@ -57,3 +77,4 @@ def bright_sources():
         [299.86667,  40.73389,  7920,0,0,0, 200e6, -0.78, 0, 0, 0, 0],  # Cyg
         [350.86667,  58.81167, 11900,0,0,0, 200e6, -0.41, 0, 0, 0, 0]   # Cas
         ))
+

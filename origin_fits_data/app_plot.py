@@ -2,7 +2,8 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-
+import os
+import astropy.io.fits as fits
 import argparse
 
 
@@ -41,17 +42,16 @@ import argparse
 
 
 
-import astropy.io.fits as fits
 
-fits_list = ["50_MHz_noerror_I.fits","50_MHz_iono_I.fits"]
-fits_list = ["70_MHz_noerror_I.fits","70_MHz_iono_I.fits"]
-fits_list = ["110_MHz_noerror_I.fits","110_MHz_iono_I.fits"]
-fits_list = ["230_MHz_noerror_I.fits","230_MHz_iono_I.fits"]
+fits_list = ["50_MHz_no_errors_I.fits","50_MHz_iono_I.fits"]
+# fits_list = ["70_MHz_no_errors_I.fits","70_MHz_iono_I.fits"]
+# fits_list = ["110_MHz_no_errors_I.fits","110_MHz_iono_I.fits"]
+# fits_list = ["230_MHz_no_errors_I.fits","230_MHz_iono_I.fits"]
 
 def fits_duibi(name,fits_list):
     im_list = list()
     for i in fits_list:
-        fits_path = "/".join(["fits_data",i])
+        fits_path = os.path.join("./",i)
         im_list.append(fits.open(fits_path)[0].data[0])
 
     residual = im_list[0] - im_list[1]
@@ -84,4 +84,5 @@ def fits_duibi(name,fits_list):
 
     plt.savefig(name)
 
-fits_duibi("50_MHz.png",fits_list)
+
+fits_duibi(fits_list[1][:-12]+".png",fits_list)
