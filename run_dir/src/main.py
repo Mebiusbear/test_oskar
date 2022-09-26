@@ -19,7 +19,7 @@ import oskar
 
 from utils import get_start_time
 
-axis_freq = [70.0,110.0]
+axis_freq = [50.0,70.0,110.0]
 
 
 LOG = logging.getLogger()
@@ -180,7 +180,7 @@ def run_single(prefix_field, settings, sky, freq_MHz, out0_name, results):
     settings["telescope/ionosphere_screen_type"] = "External"
     settings[
         "telescope/external_tec_screen/input_fits_file"
-    ] = "../test_screen_60s.fits"
+    ] = "../test_screen_60s_4.fits"
     settings["interferometer/oskar_vis_filename"] = out + ".vis"
     settings["interferometer/ms_filename"] = out + ".ms"
     make_vis_data(settings, sky)
@@ -253,8 +253,7 @@ def run_set(prefix, base_settings, fields, axis_freq, plot_only):
                 settings["telescope/external_tec_screen/input_fits_file"] = ""
                 settings["interferometer/oskar_vis_filename"] = out0 + ".vis"
                 settings["interferometer/ms_filename"] = out0 + ".ms"
-                # print (settings.to_dict())
-                # make_vis_data(settings, sky)
+                make_vis_data(settings, sky)
 
                 # Simulate the error case.
                 run_single(

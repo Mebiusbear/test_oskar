@@ -32,8 +32,13 @@ base_settings = {
 
 ## part 2
 ```
+singularity ........
 cd run_dir
 python3 src/main.py
+
+rm -r *fits *vis *ms *log
+
+main.py ionosphere line-183
 ```
 
 ## part 3
@@ -43,4 +48,12 @@ freqs = [50,70]
 # ---------------------------------------------
 mkdir fits_data
 python3 app_imager.py
+
+```
+
+## part 4
+
+```
+cd arch_data/arch....
+python ../../run_dir/src/app_plot.py
 ```

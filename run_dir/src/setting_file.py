@@ -5,7 +5,7 @@ base_settings = {
     "simulator": {
         "double_precision": True,
         "use_gpus": True,
-        "cuda_device_ids":"0,1,2,3",
+        "cuda_device_ids":"2,3,4,5,6,7",
         "max_sources_per_chunk": 16384,
         "keep_log_file":True,
         "write_status_to_log_file":True,
@@ -50,15 +50,22 @@ fields = {
         "observation/phase_centre_ra_deg": 0.0,
         "observation/phase_centre_dec_deg": -27.0,
     },
-    "EoR1": {
-        "observation/phase_centre_ra_deg": 60.0,
-        "observation/phase_centre_dec_deg": -30.0,
-    },
-    "EoR2": {
-        "observation/phase_centre_ra_deg": 170.0,
-        "observation/phase_centre_dec_deg": -10.0,
-    },
 }
+# bachup
+# fields = {
+#     "EoR0": {
+#         "observation/phase_centre_ra_deg": 0.0,
+#         "observation/phase_centre_dec_deg": -27.0,
+#     },
+#     "EoR1": {
+#         "observation/phase_centre_ra_deg": 60.0,
+#         "observation/phase_centre_dec_deg": -30.0,
+#     },
+#     "EoR2": {
+#         "observation/phase_centre_ra_deg": 170.0,
+#         "observation/phase_centre_dec_deg": -10.0,
+#     },
+# }
 
 def bright_sources():
     """Returns a list of bright A-team sources."""

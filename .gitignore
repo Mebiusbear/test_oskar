@@ -1,7 +1,8 @@
 oskar*
 GLEAM*
-test_screen_60s.fits
+test_screen*
 
+arch_data/*
 fits_data/*.fits
 origin_fits_data/*.fits
 telescope_data/
