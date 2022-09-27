@@ -1,11 +1,12 @@
 oskar*
 GLEAM*
 test_screen*
+*.fits
 
-arch_data/*
-fits_data/*.fits
-origin_fits_data/*.fits
-telescope_data/
+
+telescope_data/*
+
+
 .cache
 .nv
 .config

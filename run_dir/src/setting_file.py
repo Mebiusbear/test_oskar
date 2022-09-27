@@ -5,7 +5,7 @@ base_settings = {
     "simulator": {
         "double_precision": True,
         "use_gpus": True,
-        "cuda_device_ids":"2,3,4,5,6,7",
+        "cuda_device_ids":"0,1,2,3",
         "max_sources_per_chunk": 16384,
         "keep_log_file":True,
         "write_status_to_log_file":True,
