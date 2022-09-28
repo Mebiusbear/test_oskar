@@ -8,7 +8,7 @@ base_settings = {
     "simulator": {
         "double_precision": True,
         "use_gpus": True,
-        "cuda_device_ids":"0,1,2,3", # "0"
+        "cuda_device_ids":"1,2,3", # "0"
         "max_sources_per_chunk": 16384,
         "keep_log_file":True,
         "write_status_to_log_file":True,
@@ -32,11 +32,10 @@ base_settings = {
 
 ## part 2
 ```
-singularity ........
+singularity shell --nv -H $PWD oskar_python3_cuda114_newest.sif
 cd run_dir
-python3 src/main.py
 
-rm -r *fits *vis *ms *log
+rm -r *fits *vis *ms *log && python3 src/main.py
 
 main.py ionosphere line-183
 ```

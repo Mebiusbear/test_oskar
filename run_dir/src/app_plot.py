@@ -22,28 +22,13 @@ im_list = np.zeros((len(freq_list),2,8192,8192))
 
 for i,freq in enumerate(freq_list):
     for fits_name in fits_list:
-        if freq in fits_name:
+        if freq in fits_name and "fits" in fits_name:
             if "errors" in fits_name:
                 im_list[i][0] = fits.open(fits_name)[0].data[0]
             else:
                 im_list[i][1] = fits.open(fits_name)[0].data[0]
 
-# for fits_name in fits_list:
-#     if "50" in fits_name:
-#         if "errors" in fits_name:
-#             im_list[0][0] = fits.open(fits_name)[0].data[0]
-#         else:
-#             im_list[0][1] = fits.open(fits_name)[0].data[0]
-#     elif "70" in fits_name:
-#         if "errors" in fits_name:
-#             im_list[1][0] = fits.open(fits_name)[0].data[0]
-#         else:
-#             im_list[1][1] = fits.open(fits_name)[0].data[0]
-#     elif "110" in fits_name:
-#         if "errors" in fits_name:
-#             im_list[2][0] = fits.open(fits_name)[0].data[0]
-#         else:
-#             im_list[2][1] = fits.open(fits_name)[0].data[0]
+
     
 def fits_duibi(im_list):
     for i,im_pair in enumerate(im_list):
@@ -51,7 +36,7 @@ def fits_duibi(im_list):
         RMS = np.sum(np.power(residual,2)) / np.power(residual.shape[0],2)
         print ("{:.3e}".format(RMS))
 
-        plt.figure(figsize=(16,9))
+        plt.figure(figsize=(16,7))
 
         plt.subplot(131)
         plt.imshow(im_pair[0],cmap="gray")
@@ -68,7 +53,7 @@ def fits_duibi(im_list):
         plt.subplot(133)
         plt.imshow(residual,cmap="gray")
         plt.title("residual")
-        plt.text(x=0,y=0,s="{:.3e}".format(RMS))
+        plt.text(x=0,y=0,s="RMS:{:.3e}".format(RMS))
         plt.axis("off")
         plt.colorbar(orientation='horizontal')
 

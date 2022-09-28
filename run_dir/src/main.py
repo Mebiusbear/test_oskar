@@ -180,7 +180,7 @@ def run_single(prefix_field, settings, sky, freq_MHz, out0_name, results):
     settings["telescope/ionosphere_screen_type"] = "External"
     settings[
         "telescope/external_tec_screen/input_fits_file"
-    ] = "../pixel_4000_step_6_scale_50.fits"
+    ] = "../pixel_1000_step_6_scale_200.fits"
     settings["interferometer/oskar_vis_filename"] = out + ".vis"
     settings["interferometer/ms_filename"] = out + ".ms"
     make_vis_data(settings, sky)
