@@ -3,10 +3,11 @@ GLEAM*
 test_screen*
 *.fits
 
-
+OSKAR*
+tec_screen
 telescope_data/*
 
-
+slurm/slurm_out
 .cache
 .nv
 .config
