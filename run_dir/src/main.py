@@ -108,6 +108,7 @@ def make_diff_image_stats(
     are identical. (It will fail horribly otherwise!)
     """
     # Set up an imager.
+    # print (filename1)
     (hdr1, handle1) = oskar.VisHeader.read(filename1)
     (hdr2, handle2) = oskar.VisHeader.read(filename2)
     frequency_hz = hdr1.freq_start_hz
@@ -180,7 +181,7 @@ def run_single(prefix_field, settings, sky, freq_MHz, out0_name, results):
     settings["telescope/ionosphere_screen_type"] = "External"
     settings[
         "telescope/external_tec_screen/input_fits_file"
-    ] = "../pixel_4000_step_6_scale_50.fits"
+    ] = "../tec_screen/pixel_4000_step_6_scale_50.fits"
     settings["interferometer/oskar_vis_filename"] = out + ".vis"
     settings["interferometer/ms_filename"] = out + ".ms"
     make_vis_data(settings, sky)
